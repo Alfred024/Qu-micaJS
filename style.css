@@ -1,0 +1,74 @@
+button{
+    border-radius: none;
+    border: solid white 1px;
+    color: white;
+    width: 35px;
+    height: 35px;
+}
+#tablaPeriodica{
+    display: grid;
+    grid-template-columns: 630px;
+    grid-template-rows: 245px 105px;
+}
+.parte1{
+    display: grid;
+    grid-template-columns: 35px 35px 350px 175px 35px;  
+    grid-template-rows: auto;  
+    justify-content: center;
+}
+.parte1 div{
+    display: grid;
+    place-content: end;
+}
+.section1, .section2, .section5{
+    grid-template-columns: 35px;
+}
+.section3{
+    grid-template-columns: repeat(10, 35px);
+    grid-template-rows: repeat(4, auto);
+}
+.section4{
+    grid-template-columns: repeat(5, 35px);
+    grid-template-rows: repeat(6, auto);
+}
+
+.parte2 div{
+    margin-top: 35px;
+    place-content:center;
+}
+.section6{
+    display: grid;
+    grid-template-columns: repeat(14, 35px);
+    grid-template-rows: repeat(2, 35px);
+}
+
+#GasN{
+    background-color: green;
+}
+#Halog{
+    background-color: rgb(135, 198, 40);
+}
+#NoMet{
+    background-color: orange;
+}
+#Metaloide{
+    background-color: palevioletred;
+}
+#OMet{
+    background-color: purple;
+}
+#MetT{
+    background-color: rgb(88, 189, 223);
+}
+#Alc{
+    background-color: rgb(246, 246, 24);
+}
+#MetAlc{
+    background-color: rgb(12, 12, 156);
+}
+#Lan{
+    background-color: rgb(135, 190, 135);
+}
+#Act{
+    background-color: rgb(12, 146, 101);
+}
