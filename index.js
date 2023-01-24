@@ -24,29 +24,45 @@ const compunds = [
 ]
 
 let sequence = "";
-let compuestoRandom = Math.floor(Math.random() * compunds.length-1);
+let compuestoRandom;
 const elementosNum = document.querySelectorAll("#tablaPeriodica button").length;
 
 for (let i = 0; i < elementosNum; i++) {
     document.querySelectorAll("#tablaPeriodica button")[i].addEventListener("click", function(){
-        elementPressed = this;
-        getSequence(elementPressed);
+        if(this.innerHTML.length === 1){
+            sequence += this.innerHTML+" ,";
+        }else{
+            sequence += this.innerHTML+",";
+        }
+
+        const section = document.getElementById("viewSequence");
+        const newElement = document.createElement("button");
+        newElement.innerHTML = this.innerHTML;
+        section.appendChild(newElement);
     });
 }
 
-async function getSequence(element){
+// const sequenceLength = compunds[0].x.sequence.length;
+//         let index = 3;
+//         do{
+//             if(this.innerHTML.length === 1){
+//                 sequence += this.innerHTML+" ,";
+//             }else{
+//                 sequence += this.innerHTML+",";
+//             }
+//             index+=3;
+//         }while(isCorrect(index) && (sequence.length < sequenceLength));
 
-    const sequenceLength = compunds[compuestoRandom].x.sequence.length;
-    let index = 3;
-    do{
-        if(element.innerHTML.length === 1){
-            sequence += element.innerHTML+" ,";
-        }else{
-            sequence += element.innerHTML+",";
-        }
-        index+=3;
-    }while(isCorrect(index) && (sequence.length < sequenceLength));
+//         if(isCorrect(index-3)){
+//             console.log("Sequence correct");
+//         }else{
+//             console.log("Mission falied");
+//         }
 
+async function randomCompound(){
+    compuestoRandom = Math.floor(Math.random() * (compunds.length)+0);
+    const divCreated = document.getElementById("compuestoRandom");
+    divCreated.innerHTML = compunds[compuestoRandom].x.name;
 }
 
 async function isCorrect(actualIndex){
