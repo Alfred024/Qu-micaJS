@@ -26,57 +26,52 @@ const compunds = [
 let sequence = "";
 let index = 3;
 let started = false;
+let repeated;
 let compuestoRandom;
-const elementosNum = document.querySelectorAll("#tablaPeriodica .parte1 button").length;
+let compuestoRandomExplored = [];
+const elementosNum = document.querySelectorAll("#tablaPeriodica button").length;
 
 for (let i = 0; i < elementosNum; i++) {
-    document.querySelectorAll("#tablaPeriodica .parte1 button")[i].addEventListener("click", function(){
+    document.querySelectorAll("#tablaPeriodica button")[i].addEventListener("click", function(){
         if(this.innerHTML.length === 1){
             sequence += this.innerHTML+" ,";
         }else{
             sequence += this.innerHTML+",";
         }
         
-        if(this.innerHTML != "Generar compuesto aleatorio"){
-            const section = document.getElementById("viewSequence");
-            const newElement = document.createElement("button");
-            newElement.innerHTML = this.innerHTML;
-            section.appendChild(newElement);
-        }
-
         if(started){
-            checkAnswer(index);
-            index+=3;
+            if(checkAnswer(index)){
+                if(index === compunds[compuestoRandom].x.sequence.length+3){
+                    //Guarda el elemento en una tabla y descarta el índice generado
+                    compuestoRandomExplored.push(compuestoRandom);
+                    sequence = "";
+                    console.log("Ganaste");
+                }else{
+                    createNewElement(this);
+                }
+            }else{
+                //Desplegar botón para reintentarlo (Desde el inicio o a partir del error??)
+                console.log("Tamal");
+                //Se equivocó
+            }
         }else{
-            
+            //Despliega info del elemento seleccionado (Nombre, número atómico, etc)
+            console.log(this.value);
         }
     });
 }
 
-// const sequenceLength = compunds[0].x.sequence.length;
-//         let index = 3;
-//         do{
-//             if(this.innerHTML.length === 1){
-//                 sequence += this.innerHTML+" ,";
-//             }else{
-//                 sequence += this.innerHTML+",";
-//             }
-//             index+=3;
-//         }while(checkAnswer(index) && (sequence.length < sequenceLength));
-
-//         if(checkAnswer(index-3)){
-//             console.log("Sequence correct");
-//         }else{
-//             console.log("Mission falied");
-//         }
-
 async function randomCompound(){
-    const text = document.querySelector("#viewSequence p");
-    text.removeAttribute("hidden");
-    compuestoRandom = Math.floor(Math.random() * (compunds.length)+0);
+    sequence = "";
+
+    do{
+        compuestoRandom = Math.floor(Math.random() * (compunds.length)+0);
+    }while(isRepeated(compuestoRandom));
+
+    const section = document.querySelector(".info");
+    section.removeAttribute("hidden");
     const divCreated = document.getElementById("compuestoRandom");
     divCreated.innerHTML ="Seleccione los elementos para formar el compuesto: "+compunds[compuestoRandom].x.name;
-    //Tiene que limpiar el viewSequence con todos los elementos generados
     console.log("Secuencia solicitada: "+compunds[compuestoRandom].x.sequence);
     started = true;
 }
@@ -86,15 +81,37 @@ async function checkAnswer(actualIndex){
 
     if(realSequenceAtIndex === sequence){
         console.log("Vas bien");
+        index += 3;
         return true;
     }else{
-        console.log("Perdiste");
-
-        started = false;
+        console.log("Incorrecto");
+        //started = false;
         sequence = "";
         const section = document.getElementById("viewSequence");
-        section.innerHTML="";
+        section.innerHTML="INCORRECTO";
         index = 3;
         return false;
     }
+}
+
+async function restart(){
+
+}
+
+async function isRepeated(randomNum){
+    repeated = false;
+    let i = 0;
+    while(!repeated && i < compuestoRandomExplored.length){
+        if(compuestoRandomExplored[i] === randomNum){
+            repeated = true;
+        }
+        i++;
+    }
+}
+
+async function createNewElement(elementPressed){
+    const answerLayout = document.getElementById("viewSequence");
+    const newElement = document.createElement("button");
+    newElement.innerHTML = elementPressed.innerHTML;
+    answerLayout.appendChild(newElement);
 }

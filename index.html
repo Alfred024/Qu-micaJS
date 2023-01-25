@@ -9,13 +9,14 @@
 </head>
 <body>
     
-    <section id="tablaPeriodica">
+    <button class="compuestoBtn" onclick="randomCompound()">Generar compuesto aleatorio</button>
 
-        <button class="compuestoBtn" onclick="randomCompound()">Generar compuesto aleatorio</button>
+
+    <section id="tablaPeriodica">
 
         <section  class="parte1">
             <div class="section1">
-                <button id="NoMet">H</button>
+                <button value="Hidrógeno" id="NoMet">H</button>
                 <button id="MetAlc">Li</button>
                 <button id="MetAlc">Na</button>
                 <button id="MetAlc">K</button>
@@ -152,13 +153,13 @@
 
     </section>
     
-    <section class="info">
-        <div id="compuestoRandom" for="">
+    <section hidden class="info">
+        <div id="compuestoRandom">
 
         </div>
         
         <div id="viewSequence">
-            <p hidden>Respuesta: </p>
+            <!-- <p hidden>Respuesta: </p> -->
         </div>
     </section>
 
