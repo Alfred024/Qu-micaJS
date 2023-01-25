@@ -24,21 +24,30 @@ const compunds = [
 ]
 
 let sequence = "";
+let index = 3;
+let started = false;
 let compuestoRandom;
-const elementosNum = document.querySelectorAll("#tablaPeriodica button").length;
+const elementosNum = document.querySelectorAll("#tablaPeriodica .parte1 button").length;
 
 for (let i = 0; i < elementosNum; i++) {
-    document.querySelectorAll("#tablaPeriodica button")[i].addEventListener("click", function(){
+    document.querySelectorAll("#tablaPeriodica .parte1 button")[i].addEventListener("click", function(){
         if(this.innerHTML.length === 1){
             sequence += this.innerHTML+" ,";
         }else{
             sequence += this.innerHTML+",";
         }
+        
+        if(this.innerHTML != "Generar compuesto aleatorio"){
+            const section = document.getElementById("viewSequence");
+            const newElement = document.createElement("button");
+            newElement.innerHTML = this.innerHTML;
+            section.appendChild(newElement);
+        }
 
-        const section = document.getElementById("viewSequence");
-        const newElement = document.createElement("button");
-        newElement.innerHTML = this.innerHTML;
-        section.appendChild(newElement);
+        if(started){
+            checkAnswer(index);
+            index+=3;
+        }
     });
 }
 
@@ -51,21 +60,33 @@ for (let i = 0; i < elementosNum; i++) {
 //                 sequence += this.innerHTML+",";
 //             }
 //             index+=3;
-//         }while(isCorrect(index) && (sequence.length < sequenceLength));
+//         }while(checkAnswer(index) && (sequence.length < sequenceLength));
 
-//         if(isCorrect(index-3)){
+//         if(checkAnswer(index-3)){
 //             console.log("Sequence correct");
 //         }else{
 //             console.log("Mission falied");
 //         }
 
 async function randomCompound(){
+    const text = document.querySelector("#viewSequence p");
+    text.removeAttribute("hidden");
     compuestoRandom = Math.floor(Math.random() * (compunds.length)+0);
     const divCreated = document.getElementById("compuestoRandom");
-    divCreated.innerHTML = compunds[compuestoRandom].x.name;
+    divCreated.innerHTML ="Seleccione los elementos para formar el compuesto: "+compunds[compuestoRandom].x.name;
+    //Tiene que limpiar el viewSequence con todos los elementos generados
+    console.log("Secuencia solicitada: "+compunds[compuestoRandom].x.sequence);
+    started = true;
 }
 
-async function isCorrect(actualIndex){
+async function checkAnswer(actualIndex){
     let realSequenceAtIndex = compunds[compuestoRandom].x.sequence.substr(0, actualIndex);
+
+    if(realSequenceAtIndex === sequence){
+        console.log("Vas bien");
+    }else{
+        console.log("Perdiste");
+    }
+    //Si es falso manda msj de game over
     return realSequenceAtIndex === sequence;
 }
