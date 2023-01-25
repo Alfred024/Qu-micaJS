@@ -19,8 +19,8 @@ const compunds = [
     {x: new Compound("Ácido cítrico","C ,C ,C ,C ,C ,C ,H ,H ,H ,H ,H ,H ,H ,H ,O ,O ,O ,O ,O ,O ,O ,","C6H8O7")},
     {x: new Compound("Ácido fosfórico","H ,H ,H ,P ,O ,O ,O ,O ,","H3PO4")},
     {x: new Compound("Ácido sulfuroso","H ,H ,S ,O ,O ,O ,","H2SO3")},
-    // {x: new Compound("Hidróxido de Magnesio","","Mg(OH)2")},
-    // {x: new Compound("Hidróxido de Calcio","","Ca(OH)2")},
+    {x: new Compound("Hidróxido de Magnesio","Mg,O ,H ,O ,H ,","Mg(OH)2")},
+    {x: new Compound("Hidróxido de Calcio","Ca,O ,H ,O ,H ,","Ca(OH)2")},
 ]
 
 let sequence = "";
@@ -47,6 +47,8 @@ for (let i = 0; i < elementosNum; i++) {
         if(started){
             checkAnswer(index);
             index+=3;
+        }else{
+            
         }
     });
 }
@@ -84,9 +86,15 @@ async function checkAnswer(actualIndex){
 
     if(realSequenceAtIndex === sequence){
         console.log("Vas bien");
+        return true;
     }else{
         console.log("Perdiste");
+
+        started = false;
+        sequence = "";
+        const section = document.getElementById("viewSequence");
+        section.innerHTML="";
+        index = 3;
+        return false;
     }
-    //Si es falso manda msj de game over
-    return realSequenceAtIndex === sequence;
 }
