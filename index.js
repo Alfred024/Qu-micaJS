@@ -42,13 +42,16 @@ for (let i = 0; i < elementosNum; i++) {
         if(started){
             if(checkAnswer(index)){
                 if(index === compunds[compuestoRandom].x.sequence.length+3){
-                    //Guarda el elemento en una tabla y descarta el índice generado
+                    createNewElement(this);
                     compuestoRandomExplored.push(compuestoRandom);
                     sequence = "";
-                    console.log("Ganaste");
+                    const answer = document.getElementById("viewSequence");
+                    answer.innerHTML = "";
+                    creteNewTableRow();
                 }else{
                     createNewElement(this);
                 }
+                
             }else{
                 //Desplegar botón para reintentarlo (Desde el inicio o a partir del error??)
                 console.log("Tamal");
@@ -63,10 +66,10 @@ for (let i = 0; i < elementosNum; i++) {
 
 async function randomCompound(){
     sequence = "";
-
     do{
         compuestoRandom = Math.floor(Math.random() * (compunds.length)+0);
-    }while(isRepeated(compuestoRandom));
+        indexRepeated(compuestoRandom)
+    }while(repeated === true);
 
     const section = document.querySelector(".info");
     section.removeAttribute("hidden");
@@ -98,7 +101,7 @@ async function restart(){
 
 }
 
-async function isRepeated(randomNum){
+async function indexRepeated(randomNum){
     repeated = false;
     let i = 0;
     while(!repeated && i < compuestoRandomExplored.length){
@@ -114,4 +117,15 @@ async function createNewElement(elementPressed){
     const newElement = document.createElement("button");
     newElement.innerHTML = elementPressed.innerHTML;
     answerLayout.appendChild(newElement);
+}
+async function creteNewTableRow(){
+    const table = document.getElementById("tablaCompuestos");
+    const newRow = document.createElement("tr");
+    const nameCompuesto = document.createElement("th");
+    nameCompuesto.innerHTML = compunds[compuestoRandom].x.name;
+    const representacionCompuesto = document.createElement("th");
+    representacionCompuesto.innerHTML = compunds[compuestoRandom].x.representation;
+    newRow.appendChild(nameCompuesto);
+    newRow.appendChild(representacionCompuesto);
+    table.appendChild(newRow);
 }
