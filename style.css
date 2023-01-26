@@ -1,12 +1,11 @@
-.compuestoBtn{
-    position: absolute; 
-    margin-right: auto; 
-    margin-left: auto; 
-    left: 0; 
-    right: 0; 
-    width: fit-content; 
-    border-radius: 10px; 
-    background-color: black; padding: 0px
+/*Estilos generales*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
 }
 button{
     border-radius: none;
@@ -16,14 +15,50 @@ button{
     height: 35px;
     background-color: greenyellow;
 }
+i{
+    color: white;
+    margin: 0px 10px;
+}
 button:hover{
     opacity: 0.7;
 }
+#neon{
+    background-color: #07a762;
+    border: solid #07a762;
+    transition: 0.5s;
+}
+#neon:hover{
+    color: 842559;
+    background-color: #08d77d;
+    box-shadow: 0 0 10px #08d77d, 0 0 30px #08d77d, 0 0 70px #08d77d;
+}
+main{
+    padding: 40px 0px;
+}
+
+/*Header styles*/
+header{
+    color: white;
+    background-color: black;
+    height: 60px;
+}
+
+/*Tabla periódica estilos*/
 #tablaPeriodica{
     display: grid;
     justify-content: center;
     grid-template-columns: auto;
     grid-template-rows: 245px 105px;
+}
+.compuestoBtn{
+    position: absolute; 
+    margin-right: auto; 
+    margin-left: auto; 
+    left: 0; 
+    right: 0; 
+    width: fit-content; 
+    border-radius: 10px; 
+    background-color: black; 
 }
 .parte1{
     display: grid;
@@ -88,14 +123,15 @@ button:hover{
     background-color: rgb(12, 146, 101);
 }
 
+/*ClicksLayouts section*/
 .info{
     padding: 10px 20px;
-    margin-top: 20px;
     color: white;
     border-radius: 10px;
     background-color: rgb(61, 59, 59);
     width: 500px;
     height: fit-content;
+    margin: 20px auto;
 }
 #compuestoRandom{
     font-weight: 600;
@@ -109,7 +145,7 @@ button:hover{
     width: 100%;
 }
 
-/*Estilos de la tabla*/
+    /*Estilos de la tabla*/
 table {
     color: white;
     width: 30%;
@@ -132,4 +168,19 @@ thead th {
     color: black;
     border-radius: 50%;
     margin-right: 40px;
+}
+
+footer div{
+    display: flex;
+    place-content: center;
+}
+footer{
+    background-color: black;
+    padding: 20px;
+    bottom: 0px;
+}
+@media (max-width:850px) {
+    #clicksLayouts{
+        flex-direction: column;
+    }
 }

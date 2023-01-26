@@ -57,11 +57,10 @@ for (let i = 0; i < elementosNum; i++) {
                 const lastElement = elements[lastElementIndex];
                 lastElement.setAttribute("style","background-color: red;")
             }
+        }else{
+            //Despliega info del elemento seleccionado (Nombre, número atómico, etc)
+            console.log(this.value);
         }
-        // else{
-        //     //Despliega info del elemento seleccionado (Nombre, número atómico, etc)
-        //     console.log(this.value);
-        // }
     });
 }
 
@@ -92,21 +91,19 @@ async function checkAnswer(actualIndex){
         started = false;
         const btnRestart = document.getElementById("restartBtn");
         btnRestart.removeAttribute("hidden");
-        // sequence = "";
-        // const section = document.getElementById("viewSequence");
-        // section.innerHTML="INCORRECTO";
-        // index = 3;
     }
 }
 
 async function restart(){
-    //Borrar los elementos que teníamos 
+    //Iniciar de cero
     sequence = "";
     index = 3;
+    started = true;
     const btnRestart = document.getElementById("restartBtn");
     btnRestart.classList.add("hidden");
     const answerLayout = document.getElementById("viewSequence");
     answerLayout.innerHTML = "";
+
     //Borrar el último elemento agregado
 }
 
