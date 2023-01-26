@@ -24,7 +24,7 @@ const compunds = [
 ]
 
 let sequence = "";
-let index = 3;
+let index;
 let started = false;
 let repeated;
 let compuestoRandom;
@@ -40,32 +40,34 @@ for (let i = 0; i < elementosNum; i++) {
         }
         
         if(started){
-            if(checkAnswer(index)){
+            checkAnswer(index);
+            createNewElement(this);
+            if(started){
                 if(index === compunds[compuestoRandom].x.sequence.length+3){
-                    createNewElement(this);
                     compuestoRandomExplored.push(compuestoRandom);
                     sequence = "";
                     const answer = document.getElementById("viewSequence");
                     answer.innerHTML = "";
                     creteNewTableRow();
-                }else{
-                    createNewElement(this);
+                    randomCompound();
                 }
-                
             }else{
-                //Desplegar botón para reintentarlo (Desde el inicio o a partir del error??)
-                console.log("Tamal");
-                //Se equivocó
+                const lastElementIndex = document.querySelectorAll("#viewSequence button").length-1;
+                const elements = document.querySelectorAll("#viewSequence button");
+                const lastElement = elements[lastElementIndex];
+                lastElement.setAttribute("style","background-color: red;")
             }
-        }else{
-            //Despliega info del elemento seleccionado (Nombre, número atómico, etc)
-            console.log(this.value);
         }
+        // else{
+        //     //Despliega info del elemento seleccionado (Nombre, número atómico, etc)
+        //     console.log(this.value);
+        // }
     });
 }
 
 async function randomCompound(){
     sequence = "";
+    index = 3;
     do{
         compuestoRandom = Math.floor(Math.random() * (compunds.length)+0);
         indexRepeated(compuestoRandom)
@@ -85,20 +87,27 @@ async function checkAnswer(actualIndex){
     if(realSequenceAtIndex === sequence){
         console.log("Vas bien");
         index += 3;
-        return true;
     }else{
-        console.log("Incorrecto");
-        //started = false;
-        sequence = "";
-        const section = document.getElementById("viewSequence");
-        section.innerHTML="INCORRECTO";
-        index = 3;
-        return false;
+        console.log("Perdiste");
+        started = false;
+        const btnRestart = document.getElementById("restartBtn");
+        btnRestart.removeAttribute("hidden");
+        // sequence = "";
+        // const section = document.getElementById("viewSequence");
+        // section.innerHTML="INCORRECTO";
+        // index = 3;
     }
 }
 
 async function restart(){
-
+    //Borrar los elementos que teníamos 
+    sequence = "";
+    index = 3;
+    const btnRestart = document.getElementById("restartBtn");
+    btnRestart.classList.add("hidden");
+    const answerLayout = document.getElementById("viewSequence");
+    answerLayout.innerHTML = "";
+    //Borrar el último elemento agregado
 }
 
 async function indexRepeated(randomNum){
