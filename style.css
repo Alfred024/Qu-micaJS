@@ -149,6 +149,7 @@ header{
 table {
     color: white;
     width: 30%;
+    height: fit-content;
     border-collapse: collapse;
     margin-left: auto;
     margin-right: auto;

@@ -23,6 +23,19 @@ const compunds = [
     {x: new Compound("Hidróxido de Calcio","Ca,O ,H ,O ,H ,","Ca(OH)2")},
 ]
 
+const Element = class{
+    constructor(name, pa, pf, confElec){
+        this.name = name;
+        this.pa = pa;
+        this.pf = pf;
+        this.confElec = confElec;
+    }
+}
+
+const elements = [
+    {e: new Element("Hidrógeno", 1.008, " -259.1°C", "1s(1)")}
+]
+
 let sequence = "";
 let index;
 let started = false;
@@ -48,6 +61,7 @@ for (let i = 0; i < elementosNum; i++) {
                     sequence = "";
                     const answer = document.getElementById("viewSequence");
                     answer.innerHTML = "";
+                    createBtnRestart();
                     creteNewTableRow();
                     randomCompound();
                 }
@@ -65,6 +79,8 @@ for (let i = 0; i < elementosNum; i++) {
 }
 
 async function randomCompound(){
+    //document.getElementById("restartBtn").classList.add("hidden");
+    document.getElementById("tablaCompuestos").removeAttribute("hidden");
     sequence = "";
     index = 3;
     do{
@@ -84,27 +100,21 @@ async function checkAnswer(actualIndex){
     let realSequenceAtIndex = compunds[compuestoRandom].x.sequence.substr(0, actualIndex);
 
     if(realSequenceAtIndex === sequence){
-        console.log("Vas bien");
         index += 3;
     }else{
-        console.log("Perdiste");
         started = false;
-        const btnRestart = document.getElementById("restartBtn");
-        btnRestart.removeAttribute("hidden");
+        // const btnRestart = document.getElementById("restartBtn");
+        // btnRestart.removeAttribute("hidden");
     }
 }
 
 async function restart(){
-    //Iniciar de cero
     sequence = "";
     index = 3;
     started = true;
-    const btnRestart = document.getElementById("restartBtn");
-    btnRestart.classList.add("hidden");
     const answerLayout = document.getElementById("viewSequence");
     answerLayout.innerHTML = "";
-
-    //Borrar el último elemento agregado
+    createBtnRestart();
 }
 
 async function indexRepeated(randomNum){
@@ -134,4 +144,12 @@ async function creteNewTableRow(){
     newRow.appendChild(nameCompuesto);
     newRow.appendChild(representacionCompuesto);
     table.appendChild(newRow);
+}
+async function createBtnRestart(){
+    const answerLayout = document.getElementById("viewSequence");
+    const newResBtn = document.createElement("button");
+    newResBtn.setAttribute("id","restartBtn");
+    newResBtn.setAttribute("onclick","restart()");
+    newResBtn.innerHTML = "R";
+    answerLayout.appendChild(newResBtn);
 }

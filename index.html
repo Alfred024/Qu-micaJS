@@ -14,6 +14,7 @@
     <header>
         <h1>Química</h1>
     </header>
+
     <main>
         <button id="neon" class="compuestoBtn" onclick="randomCompound()">Generar compuesto aleatorio</button>
 
@@ -165,28 +166,21 @@
                 </div>
                 
                 <div id="viewSequence">
-                    <button id="restartBtn" hidden onclick="restart()">
+                    <button id="restartBtn" onclick="restart()">
                         R
                     </button>
                 </div>
             </section>
 
-            <table id="tablaCompuestos">
+            <table hidden id="tablaCompuestos">
                 <tr class="newElement">
-                <th>Compuesto</th>
-                <th>Representación</th>
+                    <th>Compuesto</th>
+                    <th>Representación</th>
                 </tr>
-                <!-- <tr class="newElement">
-                <td>Agua</td>
-                <td>H2O</td>
-                </tr>
-                <tr class="newElement">
-                <td>Metano</td>
-                <td>Francisco Chang</td>
-                </tr> -->
             </table>
         </section>
     </main>
+
     <footer>
         <div>
             <a href="">
