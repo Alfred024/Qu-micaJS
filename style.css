@@ -4,9 +4,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-body{
-    height: 100vh;
-}
 button{
     border-radius: none;
     border: solid white 1px;
@@ -34,15 +31,18 @@ button:hover{
 }
 main{
     padding: 40px 0px;
+    min-height: 85vh;
 }
 
 /*Header styles*/
 header{
     color: white;
     background-color: black;
-    height: 60px;
+    height: 10vh;
 }
-
+.instrucciones{
+    padding: 0px 40px 20px 40px;
+}
 /*Tabla periódica estilos*/
 #tablaPeriodica{
     display: grid;
